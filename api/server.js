@@ -32,7 +32,6 @@ server.get("/api/users", restricted, roleCheck, (req, res) => {
 server.post("/api/register", (req, res) => {
   const user = req.body;
   user.department = user.department ? user.department : "sales";
-  console.log("Department: ", user.department);
   const hash = bcrypt.hashSync(user.password, 10);
   user.password = hash;
 
