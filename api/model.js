@@ -7,8 +7,10 @@ module.exports = {
   findById
 };
 
-function find() {
-  return db("users").select("*");
+function find(role) {
+  return db("users")
+    .select("id", "username", "department")
+    .where("department", role)
 }
 
 async function add(user) {

@@ -6,6 +6,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 const restricted = require("./restricted-mw");
+const roleCheck = require("./role-mw");
 
 const server = express();
 
@@ -20,8 +21,8 @@ server.get("/api", (req, res) => {
   res.send("🙃");
 });
 
-server.get("/api/users", restricted, (req, res) => {
-  db.find()
+server.get("/api/users", restricted, roleCheck, (req, res) => {
+  db.find(req.decodedToken.roles[0])
     .then(users => {
       res.json(users);
     })
@@ -30,7 +31,7 @@ server.get("/api/users", restricted, (req, res) => {
 
 server.post("/api/register", (req, res) => {
   const user = req.body;
-  user.department = user.department ? user.deparment : "sales";
+  user.department = user.department ? user.department : "sales";
   console.log("Department: ", user.department);
   const hash = bcrypt.hashSync(user.password, 10);
   user.password = hash;
@@ -70,10 +71,11 @@ server.post("/api/login", (req, res) => {
 
 function generateToken(user) {
   const payload = {
-    sub: user.id
+    sub: user.id,
+    roles: [user.department]
   };
 
-  return jwt.sign(payload, "VERY BERRY SECRET MESSAGE");
+  return jwt.sign(payload, process.env.SECRET_KEY);
 }
 
 module.exports = server;
