@@ -1,0 +1,32 @@
+{
+  "name": "webauth-iii-challenge",
+  "version": "1.0.0",
+  "description": "Auth III Module Project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vebradev/webauth-iii-challenge.git"
+  },
+  "author": "vebradev",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vebradev/webauth-iii-challenge/issues"
+  },
+  "homepage": "https://github.com/vebradev/webauth-iii-challenge#readme",
+  "devDependencies": {
+    "eslint": "^6.1.0",
+    "nodemon": "^1.19.1"
+  },
+  "dependencies": {
+    "bcrypt": "^3.0.6",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "helmet": "^3.19.0",
+    "jsonwebtoken": "^8.5.1",
+    "knex": "^0.19.1",
+    "sqlite3": "^4.0.9"
+  }
+}
